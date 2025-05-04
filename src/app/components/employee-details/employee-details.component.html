@@ -1,0 +1,36 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card shadow-lg border-primary">
+          <div class="card-header bg-primary text-white text-center">
+            <h4 class="mb-0">Employee Details</h4>
+          </div>
+          <div class="card-body" *ngIf="employee">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <strong>ID:</strong> {{ employee.id }}
+              </li>
+              <li class="list-group-item">
+                <strong>First Name:</strong> {{ employee.firstName }}
+              </li>
+              <li class="list-group-item">
+                <strong>Last Name:</strong> {{ employee.lastName }}
+              </li>
+              <li class="list-group-item">
+                <strong>Email:</strong> {{ employee.email }}
+              </li>
+              <li class="list-group-item">
+                <strong>Position:</strong> {{ employee.position }}
+              </li>
+            </ul>
+            <div class="text-center mt-4">
+              <button class="btn btn-outline-primary px-4" (click)="backToList()">
+                <i class="bi bi-arrow-left-circle me-2"></i>Back to List
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,85 @@
+<div class="container mt-5">
+  <div class="card shadow-lg">
+    <div class="card-header bg-warning text-white">
+      <h4 class="mb-0">Update Employee</h4>
+    </div>
+
+    <div class="card-body">
+      <form [formGroup]="employeeForm" (ngSubmit)="updateEmployee()">
+
+        <div class="form-group mb-3">
+          <label for="firstName">First Name</label>
+          <input
+            id="firstName"
+            type="text"
+            class="form-control"
+            placeholder="Enter first name"
+            formControlName="firstName"
+            [ngClass]="{ 'is-invalid': f['firstName'].touched && f['firstName'].invalid }"
+          />
+          <div *ngIf="f['firstName'].touched && f['firstName'].invalid" class="invalid-feedback">
+            <div *ngIf="f['firstName'].errors?.['required']">First name is required.</div>
+            <div *ngIf="f['firstName'].errors?.['minlength']">Minimum 3 characters.</div>
+          </div>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="lastName">Last Name</label>
+          <input
+            id="lastName"
+            type="text"
+            class="form-control"
+            placeholder="Enter last name"
+            formControlName="lastName"
+            [ngClass]="{ 'is-invalid': f['lastName'].touched && f['lastName'].invalid }"
+          />
+          <div *ngIf="f['lastName'].touched && f['lastName'].invalid" class="invalid-feedback">
+            <div *ngIf="f['lastName'].errors?.['required']">Last name is required.</div>
+            <div *ngIf="f['lastName'].errors?.['minlength']">Minimum 3 characters.</div>
+          </div>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="email">Email</label>
+          <input
+            id="email"
+            type="email"
+            class="form-control"
+            placeholder="Enter email"
+            formControlName="email"
+            [ngClass]="{ 'is-invalid': f['email'].touched && f['email'].invalid }"
+          />
+          <div *ngIf="f['email'].touched && f['email'].invalid" class="invalid-feedback">
+            <div *ngIf="f['email'].errors?.['required']">Email is required.</div>
+            <div *ngIf="f['email'].errors?.['email']">Invalid email format.</div>
+          </div>
+        </div>
+
+        <div class="form-group mb-4">
+          <label for="position">Position</label>
+          <input
+            id="position"
+            type="text"
+            class="form-control"
+            placeholder="Enter position"
+            formControlName="position"
+            [ngClass]="{ 'is-invalid': f['position'].touched && f['position'].invalid }"
+          />
+          <div *ngIf="f['position'].touched && f['position'].invalid" class="invalid-feedback">
+            <div *ngIf="f['position'].errors?.['required']">Position is required.</div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end">
+          <button type="submit" class="btn btn-success me-2" [disabled]="employeeForm.invalid">
+            Update
+          </button>
+          <button type="button" class="btn btn-secondary" (click)="back()">Cancel</button>
+        </div>
+      </form>
+
+      <div *ngIf="successMessage" class="alert alert-success mt-3">{{ successMessage }}</div>
+      <div *ngIf="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
+    </div>
+  </div>
+</div>

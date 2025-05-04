@@ -1,0 +1,67 @@
+
+
+<div class="container mt-4">
+  <div *ngIf="employees.length === 0" class="text-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <p class="mt-2">Loading employees...</p>
+  </div>
+
+ <div *ngIf="successMessage" class="alert alert-success">
+  {{ successMessage }}
+</div>
+
+<div *ngIf="errorMessage" class="alert alert-danger">
+  {{ errorMessage }}
+</div>
+  <div *ngIf="employees.length > 0">
+    <h2 class="text-center mb-4">Employee List (Page {{ currentPage }})</h2>
+
+<div class="d-flex justify-content-end mb-3">
+  <button class="btn btn-success" (click)="goToAddEmployee()">+ Add New Employee</button>
+</div>
+
+
+<div class="row mb-3">
+  <div class="col-md-6 offset-md-3">
+    <input type="text" class="form-control" placeholder="Search employees..." [(ngModel)]="searchTerm" (input)="filterEmployees()" />
+  </div>
+</div>
+
+    <table class="table table-bordered table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Position</th>
+          <th>Details</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let emp of paginatedEmployees">
+          <td>{{ emp.id }}</td>
+          <td>{{ emp.firstName }}</td>
+          <td>{{ emp.lastName }}</td>
+          <td>{{ emp.email }}</td>
+          <td>{{ emp.position }}</td>
+          <td>
+            <button class="btn btn-info btn-sm" (click)="goToDetails(emp.id)">Details</button>
+          </td>
+          <td>
+             <a [routerLink]="['/update', emp.id]" class="btn btn-sm btn-warning">Edit</a>
+          </td>
+          <td><button class="btn btn-sm btn-danger" (click)="deleteEmployee(emp.id)">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="d-flex justify-content-between">
+      <button class="btn btn-outline-primary" (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+      <button class="btn btn-outline-primary" (click)="nextPage()" [disabled]="currentPage * pageSize >= employees.length">Next</button>
+    </div>
+  </div>
+</div>
